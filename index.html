@@ -1,0 +1,1101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <title>Primera Comunión</title>
+
+  <!-- Fuentes originales -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;500;600&family=Parisienne&display=swap" rel="stylesheet" />
+
+  <style>
+    :root{
+      /* mantengo tu paleta exactamente */
+      --bg: #f9f5f1;
+      --card-bg: #ffffff;
+      --muted: #f0e6d6;
+      --accent: #8e6c88;
+      --accent-2: rgba(142,108,136,0.9);
+      --map-btn: rgba(107,142,122,0.9);
+      --text: #444;
+      --muted-text: #777;
+      --shadow: rgba(0,0,0,0.10);
+      --focus-ring: rgba(142,108,136,0.18);
+      --error: #d32f2f;
+      --warning: #f57c00;
+      --success: #388e3c;
+
+      /* variables de layout (homologadas con Batman template) */
+      --max-width: 1000px;
+      --container-padding: 18px;
+    }
+
+    /* reset / accesibilidad */
+    *{box-sizing:border-box; -webkit-tap-highlight-color: transparent}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:'Montserrat', system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      -webkit-text-size-adjust:100%;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Efectos decorativos de fondo */
+    .decoration {
+      position: absolute;
+      z-index: 0;
+      opacity: 0.08;
+    }
+    .decoration.circle {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 2px solid var(--accent);
+      top: 10%;
+      right: 10%;
+    }
+    .decoration.flower {
+      width: 80px;
+      height: 80px;
+      background: radial-gradient(circle, var(--accent) 20%, transparent 20%),
+                  radial-gradient(circle, transparent 20%, var(--accent) 20%, transparent 30%),
+                  radial-gradient(circle, var(--accent) 10%, transparent 10%);
+      background-size: 20px 20px, 40px 40px, 20px 20px;
+      background-position: 0 0, 20px 20px, 0 40px;
+      bottom: 15%;
+      left: 8%;
+      transform: rotate(25deg);
+    }
+
+    /* container homologado */
+    .invitation-container{
+      max-width:var(--max-width);
+      margin:0 auto;
+      min-height:100vh;
+      background:var(--card-bg);
+      text-align:center;
+      box-shadow:0 6px 18px var(--shadow);
+      position: relative;
+      z-index: 1;
+    }
+
+    .header-section{
+      padding:20px 16px 6px;
+      background: linear-gradient(to bottom, var(--bg), var(--card-bg) 30%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .header-section::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(to right, var(--accent), var(--map-btn), var(--accent));
+    }
+
+    .invitation-heading{
+      font-size:14px;
+      letter-spacing:1.5px;
+      text-transform:uppercase;
+      color:var(--accent);
+      margin-bottom:6px;
+      position: relative;
+      display: inline-block;
+    }
+
+    .invitation-heading::after {
+      content: "";
+      position: absolute;
+      bottom: -5px;
+      left: 25%;
+      right: 25%;
+      height: 1px;
+      background: var(--muted);
+    }
+
+    .event-title {
+      position: relative;
+      margin: 10px 0;
+    }
+
+    .event-title .first-word{ 
+      font-family:'Parisienne',cursive; 
+      font-size:50px; 
+      color:var(--accent); 
+      display:block; 
+      line-height:1;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+      animation: fadeInUp 0.8s ease-out;
+    }
+    .event-title .second-word{ 
+      font-family:'Parisienne',cursive; 
+      font-size:36px; 
+      color:var(--accent); 
+      display:block; 
+      margin-top:-8px;
+      animation: fadeInUp 0.8s ease-out 0.2s both;
+    }
+
+    .communion-image{
+      width:85%;
+      max-width:320px;
+      height:auto;
+      margin:10px auto 12px;
+      border-radius:8px;
+      object-fit:cover;
+      box-shadow:0 6px 20px var(--shadow);
+      display:block;
+      loading: lazy;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border: 3px solid var(--card-bg);
+      outline: 1px solid var(--muted);
+    }
+
+    .communion-image:hover {
+      transform: scale(1.02);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    }
+
+    .child-name{
+      font-family:'Parisienne',cursive;
+      font-size:48px;
+      color:var(--accent);
+      margin:6px 0 10px;
+      line-height:1.05;
+      animation: fadeInUp 0.8s ease-out 0.4s both;
+      position: relative;
+      display: inline-block;
+    }
+
+    .child-name::after {
+      content: "";
+      position: absolute;
+      bottom: -5px;
+      left: 10%;
+      right: 10%;
+      height: 2px;
+      background: linear-gradient(to right, transparent, var(--accent), transparent);
+    }
+
+    .content-section{ 
+      padding:0 16px 36px;
+      animation: fadeIn 1s ease-out 0.6s both;
+    }
+
+    .event-date{
+      font-size:15px;
+      text-transform:uppercase;
+      font-weight:500;
+      color:#5a4a5a;
+      padding:12px 0;
+      border-top:1px solid var(--muted);
+      border-bottom:1px solid var(--muted);
+      max-width:90%;
+      margin:18px auto;
+      letter-spacing:0.5px;
+      position: relative;
+      background: linear-gradient(to right, transparent, rgba(142,108,136,0.05), transparent);
+    }
+
+    /* Centrado aplicado: homologado para el template Batman */
+    .event-card{
+      max-width:92%;
+      margin:14px auto;
+      padding:14px 12px;
+      background: rgba(240,230,214,0.12);
+      border-top:1px solid var(--muted);
+      border-bottom:1px solid var(--muted);
+      border-radius:10px;
+      text-align:center;
+      display:block;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .event-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background: var(--accent);
+      opacity: 0.7;
+    }
+
+    .event-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    }
+
+    .event-type{ 
+      font-weight:600; 
+      font-size:14px; 
+      color:#3a2e3a; 
+      margin-bottom:6px;
+      position: relative;
+      display: inline-block;
+    }
+
+    .event-type::after {
+      content: "";
+      position: absolute;
+      bottom: -3px;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: var(--muted);
+    }
+
+    .event-time{ 
+      font-size:14px; 
+      color:#5a5a5a; 
+      margin-bottom:8px;
+      font-weight: 500;
+    }
+
+    .event-location{ 
+      font-style:italic; 
+      font-size:13px; 
+      color:var(--muted-text); 
+      line-height:1.4; 
+      white-space:pre-line; 
+      text-align:center;
+    }
+
+    .map-button, .confirm-button, .gift-button{
+      display:inline-block;
+      margin:10px auto;
+      padding:12px 25px;
+      border-radius:25px;
+      font-size:14px;
+      font-weight:500;
+      cursor:pointer;
+      border:none;
+      transition:all .18s ease;
+      min-width:160px;
+      text-decoration:none;
+      color:#fff;
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .map-button::before, .confirm-button::before, .gift-button::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+      transition: left 0.5s;
+      z-index: -1;
+    }
+
+    .map-button:hover::before, .confirm-button:hover::before, .gift-button:hover::before {
+      left: 100%;
+    }
+
+    .map-button, .gift-button { 
+      background:var(--map-btn);
+      box-shadow: 0 3px 8px rgba(107,142,122,0.3);
+    }
+    .map-button:hover, .gift-button:hover { 
+      transform:translateY(-2px);
+      box-shadow: 0 5px 12px rgba(107,142,122,0.4);
+    }
+    
+    .confirm-button{ 
+      background:var(--accent-2); 
+      margin-bottom:30px;
+      box-shadow: 0 3px 8px rgba(142,108,136,0.3);
+    }
+    .confirm-button:hover{ 
+      transform:translateY(-2px);
+      box-shadow: 0 5px 12px rgba(142,108,136,0.4);
+    }
+
+    /* Modal homologado (misma estructura que Batman template) */
+    .modal{ 
+      position:fixed; 
+      top:0; 
+      left:0; 
+      width:100%; 
+      height:100%; 
+      display:flex; 
+      align-items:center; 
+      justify-content:center; 
+      background:rgba(0,0,0,0.45); 
+      z-index:1000; 
+      opacity:0; 
+      pointer-events:none; 
+      transition:opacity .25s ease;
+    }
+    .modal.active{ 
+      opacity:1; 
+      pointer-events:all;
+    }
+    .modal-content{
+      position:relative;
+      width:92%; 
+      max-width:400px;
+      background:var(--card-bg);
+      padding:20px;
+      border-radius:12px;
+      box-shadow:0 8px 24px var(--shadow);
+      border-top:3px solid var(--accent);
+      transform:translateY(16px);
+      transition:transform .25s ease;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+    .modal.active .modal-content{ 
+      transform:translateY(0);
+    }
+
+    .close-modal{
+      position:absolute; 
+      top:10px; 
+      right:10px;
+      width:34px; 
+      height:34px; 
+      border-radius:6px;
+      display:flex; 
+      align-items:center; 
+      justify-content:center;
+      background:transparent; 
+      border:none; 
+      cursor:pointer;
+      color:var(--accent); 
+      font-size:18px; 
+      padding:0; 
+      z-index:3;
+      transition: background 0.2s;
+    }
+
+    .close-modal:hover {
+      background: rgba(142,108,136,0.1);
+    }
+
+    .modal-title{ 
+      font-family:'Parisienne',cursive; 
+      color:var(--accent); 
+      font-size:22px; 
+      margin:0 0 12px; 
+      text-align:center;
+    }
+
+    .form-group{ 
+      margin-bottom:12px; 
+      text-align:left;
+      position: relative;
+    }
+    .form-label{ 
+      display:block; 
+      margin-bottom:6px; 
+      font-size:13px; 
+      color:#5a4a5a; 
+      font-weight:500;
+    }
+    .modal-content input[type="text"], 
+    .modal-content input[type="number"],
+    .modal-content input[type="email"],
+    .modal-content input[type="tel"] {
+      width:100%; 
+      padding:10px 12px; 
+      border-radius:8px; 
+      border:1px solid #e0d5c8; 
+      background:#f9f5f1; 
+      font-size:14px;
+      transition: all 0.2s;
+    }
+    .modal-content input:focus{ 
+      outline:none; 
+      box-shadow:0 0 0 6px var(--focus-ring); 
+      border-color:var(--accent);
+    }
+    
+    .modal-content input.error {
+      border-color: var(--error);
+      box-shadow: 0 0 0 6px rgba(211, 47, 47, 0.1);
+    }
+    
+    .modal-content input.warning {
+      border-color: var(--warning);
+      box-shadow: 0 0 0 6px rgba(245, 124, 0, 0.1);
+    }
+    
+    .error-message {
+      color: var(--error);
+      font-size: 12px;
+      margin-top: 4px;
+      display: none;
+    }
+    
+    .warning-message {
+      color: var(--warning);
+      font-size: 12px;
+      margin-top: 4px;
+      display: none;
+    }
+
+    .submit-btn{ 
+      width:100%; 
+      padding:12px; 
+      border-radius:20px; 
+      border:none; 
+      background:var(--accent-2); 
+      color:#fff; 
+      font-weight:600; 
+      cursor:pointer; 
+      margin-top:6px;
+      transition: all 0.2s;
+    }
+    .submit-btn:hover:not([disabled]) {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 10px rgba(142,108,136,0.4);
+    }
+    .submit-btn[disabled]{ 
+      opacity:0.6; 
+      cursor:not-allowed;
+    }
+
+    .loading-spinner{ 
+      display:none; 
+      width:24px; 
+      height:24px; 
+      margin:10px auto; 
+      border:3px solid rgba(142,108,136,0.28); 
+      border-top-color:var(--accent); 
+      border-radius:50%; 
+      animation:spin 1s linear infinite;
+    }
+    @keyframes spin{ 
+      to { 
+        transform:rotate(360deg); 
+      } 
+    }
+
+    .success{ 
+      font-family:'Parisienne',cursive; 
+      font-size:20px; 
+      color:var(--success); 
+      text-align:center; 
+      display:none; 
+      margin-top:12px;
+      animation: pulse 1.5s infinite;
+    }
+
+    footer{ 
+      padding:12px 16px;
+      font-size:12px; 
+      color:var(--muted-text); 
+      background:transparent;
+      border-top: 1px solid var(--muted);
+    }
+
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .footer-version {
+      text-align: left;
+    }
+
+    .footer-info {
+      text-align: right;
+    }
+
+    :focus{ 
+      outline:3px solid var(--focus-ring); 
+      outline-offset:2px;
+    }
+
+    /* Animaciones */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+
+    @media (max-width:420px){
+      .modal-content{ 
+        padding:16px; 
+        max-width:320px;
+      }
+      .child-name{ 
+        font-size:40px;
+      }
+      .event-title .first-word {
+        font-size: 42px;
+      }
+      .event-title .second-word {
+        font-size: 30px;
+      }
+      .decoration {
+        display: none;
+      }
+      .footer-content {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+      }
+      .footer-version,
+      .footer-info {
+        text-align: left;
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Elementos decorativos de fondo -->
+  <div class="decoration circle"></div>
+  <div class="decoration flower"></div>
+
+  <!-- Nuevo header inspirado en Invitea -->
+  <header style="position:sticky;top:0;z-index:60;background:linear-gradient(180deg, rgba(255,255,255,0.92), rgba(249,245,241,0.95));backdrop-filter:blur(6px);border-bottom:1px solid var(--muted);">
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 16px;max-width:var(--max-width);margin:0 auto;">
+      <!-- Logo Invitea -->
+      <div style="display:flex;align-items:center;gap:12px;">
+        <div style="width:120px;height:34px;border-radius:8px;background:linear-gradient(135deg,var(--accent),var(--map-btn));padding:4px;display:flex;align-items:center;justify-content:center;box-shadow:0 3px 8px var(--shadow);">
+          <div style="color:white;font-family:'Montserrat',sans-serif;font-weight:700;font-size:16px;letter-spacing:-0.02em;">Invitéa</div>
+        </div>
+      </div>
+
+      <!-- Redes sociales -->
+      <div style="display:flex;gap:8px;align-items:center;">
+        <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Instagram" style="display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:6px;background:transparent;border:1px solid var(--muted);transition:transform 0.2s ease;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" style="color:var(--accent);">
+            <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.2" fill="none"></rect>
+            <path d="M12 8.2a3.8 3.8 0 1 0 0 7.6 3.8 3.8 0 0 0 0-7.6z" stroke="currentColor" stroke-width="1.2" fill="none"></path>
+            <circle cx="17.5" cy="6.5" r="0.6" fill="currentColor"></circle>
+          </svg>
+        </a>
+        <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Facebook" style="display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:6px;background:transparent;border:1px solid var(--muted);transition:transform 0.2s ease;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" style="color:var(--accent);">
+            <path d="M15 8.5h1.8V5.8H15c-1.6 0-2.8 1-2.8 2.6v1.1H11v2.3h1.2V20h2.6v-7.5H15z" fill="currentColor"></path>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <div class="invitation-container">
+    <div class="header-section" role="banner">
+      <div class="invitation-heading">Acompáñame a celebrar mi</div>
+      <div class="event-title" aria-hidden="true">
+        <span class="first-word">Primera Comunión</span>
+      </div>
+
+      <img class="communion-image" src="https://i.ibb.co/MyswS4v6/image.jpg" alt="Daniela en su Primera Comunión" loading="lazy" />
+      <div class="child-name">Daniela Sanchez Perez</div>
+    </div>
+
+    <div class="content-section" role="main">
+      <div class="event-date" id="dynamicDate" aria-label="Fecha del evento"></div>
+
+      <div class="event-card" aria-labelledby="ceremonia">
+        <div id="ceremonia" class="event-type">Ceremonia</div>
+        <div class="event-time">13:00 hrs</div>
+        <div class="event-location">Parroquia Nuestra Señora de Guadalupe<br/>Calle Cualquiera 123, Cualquier Lugar<br/>Ciudad de México, CDMX</div>
+        <a class="map-button" href="https://www.google.com/maps/search/?api=1&query=Estrella%2038%2C%20San%20Juan%20Xalpa%2C%20Iztapalapa%2C%2009850%20Ciudad%20de%20M%C3%A9xico%2C%20CDMX" target="_blank" rel="noopener noreferrer">Cómo llegar</a>
+      </div>
+
+      <div class="event-card" aria-labelledby="recepcion">
+        <div id="recepcion" class="event-type">Recepción</div>
+        <div class="event-time">15:00 hrs</div>
+        <div class="event-location">Salón de Fiestas "El Arca de los Niños"<br/>Calle Cualquiera 123, Cualquier Lugar<br/>Ciudad de México, CDMX</div>
+        <a class="map-button" href="https://www.google.com/maps/search/?api=1&query=El%20Arca%20de%20los%20Ni%C3%B1os%2C%205%20de%20Mayo%20n%C3%BAm.%2031%2C%20Col.%20Los%20Reyes%20Culhuac%C3%A1n%2C%20Iztapalapa%2C%20Ciudad%20de%20M%C3%A9xico%2C%20CDMX" target="_blank" rel="noopener noreferrer">Cómo llegar</a>
+      </div>
+
+      <!-- Nueva sección: Mesa de Regalos -->
+      <div class="event-card" aria-labelledby="regalos">
+        <div id="regalos" class="event-type">Mesa de Regalos</div>
+        <div class="event-location">Si deseas tener un detalle conmigo, puedes visitar mi mesa de regalos en Liverpool</div>
+        <a class="gift-button" href="https://mesaderegalos.liverpool.com.mx/milistaderegalos" target="_blank" rel="noopener noreferrer">Ver Regalos</a>
+      </div>
+
+      <button class="confirm-button" id="openRsvp" aria-haspopup="dialog">Confirma asistencia</button>
+    </div>
+
+    <!-- Footer actualizado -->
+    <footer>
+      <div class="footer-content">
+        <div class="footer-version">
+          Versión <strong>1.0.3</strong> — <time id="fechaPublicacion"></time>
+        </div>
+        <div class="footer-info">
+          © 2025 Invitea — Todos los derechos reservados<br/>
+          <a href="#contacto" style="color:var(--accent)">Contacto</a> · <a href="mailto:invitea.design@gmail.com" style="color:var(--muted-text)">invitea.design@gmail.com</a>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Modal homologado -->
+  <div id="rsvpModal" class="modal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="modalTitle">
+    <div class="modal-content" role="document">
+      <button class="close-modal" id="closeModalBtn" aria-label="Cerrar">&times;</button>
+      <div id="modalTitle" class="modal-title">Confirma tu asistencia</div>
+
+      <form id="rsvpForm" novalidate>
+        <div class="form-group">
+          <label for="name" class="form-label">Nombre(s) y apellido(s):</label>
+          <input id="name" name="name" type="text" autocomplete="name" required />
+          <div class="error-message" id="nameError">Por favor ingresa tu nombre completo (mínimo 3 caracteres)</div>
+        </div>
+
+        <div class="form-group">
+          <label for="email" class="form-label">Correo electrónico:</label>
+          <input id="email" name="email" type="email" autocomplete="email" />
+          <div class="error-message" id="emailError">Por favor ingresa un correo electrónico válido</div>
+          <div class="warning-message" id="emailDuplicateError">Este correo electrónico ya ha confirmado asistencia</div>
+        </div>
+
+        <div class="form-group">
+          <label for="phone" class="form-label">Número telefónico:</label>
+          <input id="phone" name="phone" type="tel" autocomplete="tel" placeholder="(XX) XXXX-XXXX" />
+          <div class="error-message" id="phoneError">Por favor ingresa un número telefónico válido (10 dígitos)</div>
+        </div>
+
+        <div class="form-group">
+          <label for="adults" class="form-label">Número de adultos:</label>
+          <input id="adults" name="adults" type="number" min="1" value="1" required />
+          <div class="error-message" id="adultsError">Debe haber al menos 1 adulto</div>
+        </div>
+
+        <div class="form-group">
+          <label for="children" class="form-label">Número de niños:</label>
+          <input id="children" name="children" type="number" min="0" value="0" required />
+          <div class="error-message" id="childrenError">El número de niños no puede ser negativo</div>
+        </div>
+
+        <button type="submit" class="submit-btn" id="submitBtn">Enviar confirmación</button>
+        <div class="loading-spinner" id="loadingSpinner" aria-hidden="true"></div>
+      </form>
+
+      <div id="thankYouMessage" class="success" aria-live="polite">¡Gracias por confirmar!</div>
+    </div>
+  </div>
+
+  <!-- Firebase compat (dejo como en el resto) -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js" defer></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js" defer></script>
+
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyCTh8kPdvu-6Z5_cckNts22VrhdUTLVspM",
+      authDomain: "invitea-f7331.firebaseapp.com",
+      projectId: "invitea-f7331",
+      storageBucket: "invitea-f7331.firebasestorage.app",
+      messagingSenderId: "145115727672",
+      appId: "1:145115727672:web:d1d89c20bf946b9e2663cd",
+      measurementId: "G-8JS1MDZVGQ"
+    };
+
+    // Función para generar fecha dinámica (mañana)
+    function getDynamicDate() {
+      const tomorrow = new Date();
+      tomorrow.setDate(tomorrow.getDate() + 1);
+      
+      const options = { 
+        weekday: 'long', 
+        day: 'numeric', 
+        month: 'long', 
+        year: 'numeric' 
+      };
+      
+      const dateString = tomorrow.toLocaleDateString('es-MX', options);
+      // Capitalizar el día de la semana
+      return dateString.charAt(0).toUpperCase() + dateString.slice(1);
+    }
+
+    // Preload de imagen para mejor rendimiento
+    function preloadImage(url) {
+      const img = new Image();
+      img.src = url;
+    }
+
+    window.addEventListener('load', () => {
+      // Preload de la imagen principal
+      preloadImage('https://i.ibb.co/MyswS4v6/image.jpg');
+      
+      // Establecer fecha dinámica
+      const dynamicDateElement = document.getElementById('dynamicDate');
+      if (dynamicDateElement) {
+        dynamicDateElement.textContent = getDynamicDate();
+      }
+      
+      if (window.firebase && firebase.initializeApp) {
+        try { 
+          firebase.initializeApp(firebaseConfig); 
+          window.db = firebase.firestore(); 
+        }
+        catch(e) { console.warn('Firebase init:', e); }
+      } else console.warn('Firebase no cargó correctamente.');
+
+      // footer fecha/hora al cargar
+      document.getElementById('fechaPublicacion').textContent =
+        new Date().toLocaleString('es-MX', { year:'numeric', month:'short', day:'2-digit', hour:'2-digit', minute:'2-digit' });
+    });
+
+    (function(){
+      const openBtn = document.getElementById('openRsvp');
+      const modal = document.getElementById('rsvpModal');
+      const closeBtn = document.getElementById('closeModalBtn');
+      const form = document.getElementById('rsvpForm');
+      const submitBtn = document.getElementById('submitBtn');
+      const loadingSpinner = document.getElementById('loadingSpinner');
+      const thankYou = document.getElementById('thankYouMessage');
+      let previousFocus = null;
+
+      // Elementos del formulario
+      const nameInput = document.getElementById('name');
+      const emailInput = document.getElementById('email');
+      const phoneInput = document.getElementById('phone');
+      const adultsInput = document.getElementById('adults');
+      const childrenInput = document.getElementById('children');
+      
+      // Mensajes de error
+      const nameError = document.getElementById('nameError');
+      const emailError = document.getElementById('emailError');
+      const emailDuplicateError = document.getElementById('emailDuplicateError');
+      const phoneError = document.getElementById('phoneError');
+      const adultsError = document.getElementById('adultsError');
+      const childrenError = document.getElementById('childrenError');
+
+      // Función para validar email
+      function isValidEmail(email) {
+        if (!email) return true; // Email es opcional
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+      }
+
+      // Función para validar teléfono (formato mexicano: 10 dígitos)
+      function isValidPhone(phone) {
+        if (!phone) return true; // Teléfono es opcional
+        // Remover caracteres no numéricos
+        const cleanPhone = phone.replace(/\D/g, '');
+        return cleanPhone.length === 10;
+      }
+
+      // Función para formatear teléfono con nueva máscara (XX) XXXX-XXXX
+      function formatPhoneNumber(value) {
+        // Remover todo excepto números
+        const numbers = value.replace(/\D/g, '');
+        
+        // Aplicar formato (XX) XXXX-XXXX
+        if (numbers.length <= 2) {
+          return numbers;
+        } else if (numbers.length <= 6) {
+          return `(${numbers.slice(0, 2)}) ${numbers.slice(2)}`;
+        } else {
+          return `(${numbers.slice(0, 2)}) ${numbers.slice(2, 6)}-${numbers.slice(6, 10)}`;
+        }
+      }
+
+      // Función para verificar si el correo ya existe en la base de datos
+      async function checkEmailExists(email) {
+        if (!email || !isValidEmail(email)) return false;
+        
+        try {
+          const snapshot = await db.collection('ejemploprimeracomunion_panel')
+            .where('email', '==', email.toLowerCase().trim())
+            .get();
+          
+          return !snapshot.empty;
+        } catch (error) {
+          console.error('Error al verificar correo:', error);
+          return false;
+        }
+      }
+
+      // Función para mostrar errores de forma más clara
+      function showError(input, errorElement, message) {
+        errorElement.textContent = message;
+        errorElement.style.display = 'block';
+        input.classList.add('error');
+        input.focus();
+      }
+
+      // Función para limpiar errores
+      function clearError(input, errorElement) {
+        errorElement.style.display = 'none';
+        input.classList.remove('error', 'warning');
+      }
+
+      // Event listener para formatear teléfono en tiempo real
+      phoneInput.addEventListener('input', function(e) {
+        const formatted = formatPhoneNumber(e.target.value);
+        e.target.value = formatted;
+        
+        // Validar y mostrar/ocultar error
+        if (e.target.value && !isValidPhone(e.target.value)) {
+          showError(phoneInput, phoneError, 'Por favor ingresa un número telefónico válido (10 dígitos)');
+        } else {
+          clearError(phoneInput, phoneError);
+        }
+      });
+
+      // Validación en tiempo real para email
+      emailInput.addEventListener('blur', async function(e) {
+        const email = e.target.value.trim();
+        
+        if (email && !isValidEmail(email)) {
+          showError(emailInput, emailError, 'Por favor ingresa un correo electrónico válido');
+          emailDuplicateError.style.display = 'none';
+          return;
+        }
+        
+        if (email && isValidEmail(email)) {
+          const emailExists = await checkEmailExists(email);
+          if (emailExists) {
+            emailDuplicateError.style.display = 'block';
+            emailError.style.display = 'none';
+            emailInput.classList.add('warning');
+            emailInput.classList.remove('error');
+          } else {
+            clearError(emailInput, emailError);
+            emailDuplicateError.style.display = 'none';
+          }
+        } else {
+          clearError(emailInput, emailError);
+          emailDuplicateError.style.display = 'none';
+        }
+      });
+
+      // Validación en tiempo real para nombre
+      nameInput.addEventListener('blur', function(e) {
+        if (e.target.value.length < 3) {
+          showError(nameInput, nameError, 'Por favor ingresa tu nombre completo (mínimo 3 caracteres)');
+        } else {
+          clearError(nameInput, nameError);
+        }
+      });
+
+      // Validación en tiempo real para adultos
+      adultsInput.addEventListener('blur', function(e) {
+        if (e.target.value < 1) {
+          showError(adultsInput, adultsError, 'Debe haber al menos 1 adulto');
+        } else {
+          clearError(adultsInput, adultsError);
+        }
+      });
+
+      // Validación en tiempo real para niños
+      childrenInput.addEventListener('blur', function(e) {
+        if (e.target.value < 0) {
+          showError(childrenInput, childrenError, 'El número de niños no puede ser negativo');
+        } else {
+          clearError(childrenInput, childrenError);
+        }
+      });
+
+      function openModal(){
+        previousFocus = document.activeElement;
+        modal.classList.add('active');
+        modal.setAttribute('aria-hidden','false');
+        document.body.style.overflow = 'hidden';
+        setTimeout(()=>{ nameInput.focus(); }, 50);
+        document.addEventListener('keydown', handleKey);
+      }
+      
+      function closeModal(){
+        modal.classList.remove('active');
+        modal.setAttribute('aria-hidden','true');
+        document.body.style.overflow = '';
+        document.removeEventListener('keydown', handleKey);
+        setTimeout(()=>{
+          thankYou.style.display = 'none';
+          form.style.display = '';
+          form.reset();
+          adultsInput.value = 1;
+          childrenInput.value = 0;
+          
+          // Limpiar errores
+          [nameError, emailError, emailDuplicateError, phoneError, adultsError, childrenError].forEach(error => {
+            error.style.display = 'none';
+          });
+          [nameInput, emailInput, phoneInput, adultsInput, childrenInput].forEach(input => {
+            input.classList.remove('error', 'warning');
+          });
+          
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Enviar confirmación';
+          loadingSpinner.style.display = 'none';
+          previousFocus?.focus?.();
+        }, 200);
+      }
+      
+      function handleKey(e){ 
+        if (e.key === 'Escape') closeModal(); 
+        // Mejor navegación por teclado en el modal
+        if (e.key === 'Tab' && modal.classList.contains('active')) {
+          const focusableElements = modal.querySelectorAll('button, input, textarea, select, a[href]');
+          const firstElement = focusableElements[0];
+          const lastElement = focusableElements[focusableElements.length - 1];
+          
+          if (e.shiftKey) {
+            if (document.activeElement === firstElement) {
+              lastElement.focus();
+              e.preventDefault();
+            }
+          } else {
+            if (document.activeElement === lastElement) {
+              firstElement.focus();
+              e.preventDefault();
+            }
+          }
+        }
+      }
+
+      modal.addEventListener('click', (e)=>{ if (e.target === modal) closeModal(); });
+      openBtn.addEventListener('click', (e)=>{ e.preventDefault(); openModal(); });
+      closeBtn.addEventListener('click', closeModal);
+
+      form.addEventListener('submit', async (e)=>{
+        e.preventDefault();
+        if (!window.db) { 
+          alert('Base de datos no disponible. Por favor, intenta más tarde.'); 
+          return; 
+        }
+        
+        // Validar todos los campos
+        let isValid = true;
+        
+        // Validar nombre
+        if (nameInput.value.length < 3) {
+          showError(nameInput, nameError, 'Por favor ingresa tu nombre completo (mínimo 3 caracteres)');
+          isValid = false;
+        }
+        
+        // Validar email
+        const email = emailInput.value.trim();
+        if (email && !isValidEmail(email)) {
+          showError(emailInput, emailError, 'Por favor ingresa un correo electrónico válido');
+          isValid = false;
+        }
+        
+        // Verificar si el correo ya existe
+        if (email && isValidEmail(email)) {
+          const emailExists = await checkEmailExists(email);
+          if (emailExists) {
+            emailDuplicateError.style.display = 'block';
+            emailError.style.display = 'none';
+            emailInput.classList.add('warning');
+            isValid = false;
+          }
+        }
+        
+        // Validar teléfono
+        if (phoneInput.value && !isValidPhone(phoneInput.value)) {
+          showError(phoneInput, phoneError, 'Por favor ingresa un número telefónico válido (10 dígitos)');
+          isValid = false;
+        }
+        
+        // Validar adultos
+        if (adultsInput.value < 1) {
+          showError(adultsInput, adultsError, 'Debe haber al menos 1 adulto');
+          isValid = false;
+        }
+        
+        // Validar niños
+        if (childrenInput.value < 0) {
+          showError(childrenInput, childrenError, 'El número de niños no puede ser negativo');
+          isValid = false;
+        }
+        
+        if (!isValid) {
+          // Enfocar el primer campo con error
+          const firstError = form.querySelector('.error, .warning');
+          if (firstError) firstError.focus();
+          return;
+        }
+        
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Enviando...';
+        loadingSpinner.style.display = 'block';
+
+        const name = nameInput.value.trim();
+        const phone = phoneInput.value;
+        const adults = Number(adultsInput.value) || 0;
+        const children = Number(childrenInput.value) || 0;
+        const userAgent = navigator.userAgent || '';
+        const screenSize = `${window.innerWidth}x${window.innerHeight}`;
+
+        try {
+          // Guardar en la colección ejemploprimeracomunion_panel
+          await db.collection('ejemploprimeracomunion_panel').add({
+            nombre: name,
+            email: email || 'No proporcionado',
+            telefono: phone || 'No proporcionado',
+            adultos: adults,
+            ninos: children,
+            dispositivo: userAgent,
+            pantalla: screenSize,
+            fecha: new Date().toLocaleString('es-MX'),
+            timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+          });
+          form.style.display = 'none';
+          thankYou.style.display = 'block';
+          loadingSpinner.style.display = 'none';
+          setTimeout(closeModal, 1800);
+        } catch(err){
+          console.error('Error al guardar en Firebase:', err);
+          alert('Ocurrió un error al guardar. Por favor, intenta nuevamente.');
+          submitBtn.disabled=false;
+          submitBtn.textContent='Enviar confirmación';
+          loadingSpinner.style.display='none';
+        }
+      });
+
+      // Mejor experiencia móvil
+      document.addEventListener('DOMContentLoaded', ()=>{
+        const inputs = document.querySelectorAll('input');
+        inputs.forEach(input=>{
+          input.addEventListener('touchstart', (ev)=>ev.stopPropagation(), { passive: true });
+          input.addEventListener('focus', ()=> {
+            // Scroll suave para inputs en móvil
+            if (window.innerWidth < 768) {
+              setTimeout(() => {
+                input.scrollIntoView({ behavior: 'smooth', block: 'center' });
+              }, 300);
+            }
+          });
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
