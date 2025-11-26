@@ -5,12 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
   <title>Primera Comunión</title>
 
-  <!-- Fuentes originales -->
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;500;600&family=Parisienne&display=swap" rel="stylesheet" />
 
   <style>
     :root{
-      /* mantengo tu paleta exactamente */
+      /* Paleta Original Mantenida */
       --bg: #f9f5f1;
       --card-bg: #ffffff;
       --muted: #f0e6d6;
@@ -25,7 +24,7 @@
       --warning: #f57c00;
       --success: #388e3c;
 
-      /* variables de layout (homologadas con Batman template) */
+      /* variables de layout */
       --max-width: 1000px;
       --container-padding: 18px;
     }
@@ -72,7 +71,7 @@
       transform: rotate(25deg);
     }
 
-    /* container homologado */
+    /* container */
     .invitation-container{
       max-width:var(--max-width);
       margin:0 auto;
@@ -205,7 +204,6 @@
       background: linear-gradient(to right, transparent, rgba(142,108,136,0.05), transparent);
     }
 
-    /* Centrado aplicado: homologado para el template Batman */
     .event-card{
       max-width:92%;
       margin:14px auto;
@@ -325,7 +323,81 @@
       box-shadow: 0 5px 12px rgba(142,108,136,0.4);
     }
 
-    /* Modal homologado (misma estructura que Batman template) */
+    /* ESTILOS DEL HEADER LINK */
+    .logo-link {
+      text-decoration: none;
+      display: block;
+      transition: transform 0.2s ease;
+    }
+    .logo-link:active {
+      transform: scale(0.95);
+    }
+
+    /* ESTILOS DEL FOOTER DE MARKETING (Adaptado al Tema) */
+    footer { 
+      padding: 30px 20px 20px;
+      background: linear-gradient(0deg, #f3ece4 0%, var(--bg) 100%);
+      border-top: 1px solid var(--muted);
+      margin-top: 40px;
+    }
+
+    .footer-promo {
+      text-align: center;
+      margin-bottom: 25px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--muted);
+    }
+
+    .footer-promo p {
+      color: var(--muted-text);
+      font-size: 0.9rem;
+      margin-bottom: 15px;
+    }
+
+    /* Botón Outline para venta (Estilo Elegante/Morado) */
+    .btn-cotizar {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 25px;
+      border: 1px solid var(--accent);
+      border-radius: 50px;
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: all 0.3s ease;
+      background: rgba(255,255,255,0.5);
+    }
+
+    .btn-cotizar:hover {
+      background: var(--accent);
+      color: #fff;
+      box-shadow: 0 4px 15px rgba(142,108,136,0.25);
+    }
+
+    .footer-copyright {
+      text-align: right;
+      font-size: 11px;
+      color: var(--muted-text);
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    
+    .footer-copyright a {
+      color: var(--accent);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-copyright a:hover {
+      text-decoration: underline;
+    }
+
+
+    /* Modal */
     .modal{ 
       position:fixed; 
       top:0; 
@@ -496,30 +568,6 @@
       animation: pulse 1.5s infinite;
     }
 
-    footer{ 
-      padding:12px 16px;
-      font-size:12px; 
-      color:var(--muted-text); 
-      background:transparent;
-      border-top: 1px solid var(--muted);
-    }
-
-    .footer-content {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-
-    .footer-version {
-      text-align: left;
-    }
-
-    .footer-info {
-      text-align: right;
-    }
-
     :focus{ 
       outline:3px solid var(--focus-ring); 
       outline-offset:2px;
@@ -565,35 +613,28 @@
       .decoration {
         display: none;
       }
-      .footer-content {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 8px;
-      }
-      .footer-version,
-      .footer-info {
-        text-align: left;
-        width: 100%;
+      /* Centrar copyright en móviles para mejor balance */
+      .footer-copyright {
+        text-align: center;
       }
     }
   </style>
 </head>
 <body>
-  <!-- Elementos decorativos de fondo -->
   <div class="decoration circle"></div>
   <div class="decoration flower"></div>
 
-  <!-- Nuevo header inspirado en Invitea -->
   <header style="position:sticky;top:0;z-index:60;background:linear-gradient(180deg, rgba(255,255,255,0.92), rgba(249,245,241,0.95));backdrop-filter:blur(6px);border-bottom:1px solid var(--muted);">
     <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 16px;max-width:var(--max-width);margin:0 auto;">
-      <!-- Logo Invitea -->
-      <div style="display:flex;align-items:center;gap:12px;">
-        <div style="width:120px;height:34px;border-radius:8px;background:linear-gradient(135deg,var(--accent),var(--map-btn));padding:4px;display:flex;align-items:center;justify-content:center;box-shadow:0 3px 8px var(--shadow);">
-          <div style="color:white;font-family:'Montserrat',sans-serif;font-weight:700;font-size:16px;letter-spacing:-0.02em;">Invitéa</div>
+      
+      <a href="https://invitea.github.io/home_page/" target="_blank" class="logo-link" aria-label="Ir a Invitéa">
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div style="width:120px;height:34px;border-radius:8px;background:linear-gradient(135deg,var(--accent),var(--map-btn));padding:4px;display:flex;align-items:center;justify-content:center;box-shadow:0 3px 8px var(--shadow);">
+            <div style="color:white;font-family:'Montserrat',sans-serif;font-weight:700;font-size:16px;letter-spacing:-0.02em;">Invitéa</div>
+          </div>
         </div>
-      </div>
+      </a>
 
-      <!-- Redes sociales -->
       <div style="display:flex;gap:8px;align-items:center;">
         <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Instagram" style="display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:6px;background:transparent;border:1px solid var(--muted);transition:transform 0.2s ease;">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" style="color:var(--accent);">
@@ -639,7 +680,6 @@
         <a class="map-button" href="https://www.google.com/maps/search/?api=1&query=El%20Arca%20de%20los%20Ni%C3%B1os%2C%205%20de%20Mayo%20n%C3%BAm.%2031%2C%20Col.%20Los%20Reyes%20Culhuac%C3%A1n%2C%20Iztapalapa%2C%20Ciudad%20de%20M%C3%A9xico%2C%20CDMX" target="_blank" rel="noopener noreferrer">Cómo llegar</a>
       </div>
 
-      <!-- Nueva sección: Mesa de Regalos -->
       <div class="event-card" aria-labelledby="regalos">
         <div id="regalos" class="event-type">Mesa de Regalos</div>
         <div class="event-location">Si deseas tener un detalle conmigo, puedes visitar mi mesa de regalos en Liverpool</div>
@@ -649,24 +689,25 @@
       <button class="confirm-button" id="openRsvp" aria-haspopup="dialog">Confirma asistencia</button>
     </div>
 
-    <!-- Footer actualizado -->
     <footer>
-      <div class="footer-content">
-        <div class="footer-version">
-          Versión <strong>1.0.3</strong> — <time id="fechaPublicacion"></time>
-        </div>
-        <div class="footer-info">
-          © 2025 Invitea — Todos los derechos reservados<br/>
-          <a href="#contacto" style="color:var(--accent)">Contacto</a> · <a href="mailto:invitea.design@gmail.com" style="color:var(--muted-text)">invitea.design@gmail.com</a>
-        </div>
+      <div class="footer-promo">
+        <p>¿Te gustó esta invitación?</p>
+        
+        <a href="https://invitea.github.io/home_page/" target="_blank" class="btn-cotizar">
+          <span>✨</span> Diseña tu evento con Invitéa
+        </a>
+      </div>
+
+      <div class="footer-copyright">
+        © 2025 Invitea — Todos los derechos reservados<br/>
+        <a href="#contacto">Contacto</a> · <a href="mailto:invitea.design@gmail.com">invitea.design@gmail.com</a>
       </div>
     </footer>
   </div>
 
-  <!-- Modal homologado -->
   <div id="rsvpModal" class="modal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="modalTitle">
     <div class="modal-content" role="document">
-      <button class="close-modal" id="closeModalBtn" aria-label="Cerrar">&times;</button>
+      <button class="close-modal" id="closeModalBtn" aria-label="Cerrar">×</button>
       <div id="modalTitle" class="modal-title">Confirma tu asistencia</div>
 
       <form id="rsvpForm" novalidate>
@@ -709,7 +750,6 @@
     </div>
   </div>
 
-  <!-- Firebase compat (dejo como en el resto) -->
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js" defer></script>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js" defer></script>
 
@@ -724,7 +764,6 @@
       measurementId: "G-8JS1MDZVGQ"
     };
 
-    // Función para generar fecha dinámica (mañana)
     function getDynamicDate() {
       const tomorrow = new Date();
       tomorrow.setDate(tomorrow.getDate() + 1);
@@ -737,21 +776,17 @@
       };
       
       const dateString = tomorrow.toLocaleDateString('es-MX', options);
-      // Capitalizar el día de la semana
       return dateString.charAt(0).toUpperCase() + dateString.slice(1);
     }
 
-    // Preload de imagen para mejor rendimiento
     function preloadImage(url) {
       const img = new Image();
       img.src = url;
     }
 
     window.addEventListener('load', () => {
-      // Preload de la imagen principal
       preloadImage('https://i.ibb.co/MyswS4v6/image.jpg');
       
-      // Establecer fecha dinámica
       const dynamicDateElement = document.getElementById('dynamicDate');
       if (dynamicDateElement) {
         dynamicDateElement.textContent = getDynamicDate();
@@ -764,10 +799,6 @@
         }
         catch(e) { console.warn('Firebase init:', e); }
       } else console.warn('Firebase no cargó correctamente.');
-
-      // footer fecha/hora al cargar
-      document.getElementById('fechaPublicacion').textContent =
-        new Date().toLocaleString('es-MX', { year:'numeric', month:'short', day:'2-digit', hour:'2-digit', minute:'2-digit' });
     });
 
     (function(){
@@ -780,14 +811,12 @@
       const thankYou = document.getElementById('thankYouMessage');
       let previousFocus = null;
 
-      // Elementos del formulario
       const nameInput = document.getElementById('name');
       const emailInput = document.getElementById('email');
       const phoneInput = document.getElementById('phone');
       const adultsInput = document.getElementById('adults');
       const childrenInput = document.getElementById('children');
       
-      // Mensajes de error
       const nameError = document.getElementById('nameError');
       const emailError = document.getElementById('emailError');
       const emailDuplicateError = document.getElementById('emailDuplicateError');
@@ -795,27 +824,20 @@
       const adultsError = document.getElementById('adultsError');
       const childrenError = document.getElementById('childrenError');
 
-      // Función para validar email
       function isValidEmail(email) {
-        if (!email) return true; // Email es opcional
+        if (!email) return true; 
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return emailRegex.test(email);
       }
 
-      // Función para validar teléfono (formato mexicano: 10 dígitos)
       function isValidPhone(phone) {
-        if (!phone) return true; // Teléfono es opcional
-        // Remover caracteres no numéricos
+        if (!phone) return true; 
         const cleanPhone = phone.replace(/\D/g, '');
         return cleanPhone.length === 10;
       }
 
-      // Función para formatear teléfono con nueva máscara (XX) XXXX-XXXX
       function formatPhoneNumber(value) {
-        // Remover todo excepto números
         const numbers = value.replace(/\D/g, '');
-        
-        // Aplicar formato (XX) XXXX-XXXX
         if (numbers.length <= 2) {
           return numbers;
         } else if (numbers.length <= 6) {
@@ -825,15 +847,12 @@
         }
       }
 
-      // Función para verificar si el correo ya existe en la base de datos
       async function checkEmailExists(email) {
         if (!email || !isValidEmail(email)) return false;
-        
         try {
           const snapshot = await db.collection('ejemploprimeracomunion_panel')
             .where('email', '==', email.toLowerCase().trim())
             .get();
-          
           return !snapshot.empty;
         } catch (error) {
           console.error('Error al verificar correo:', error);
@@ -841,7 +860,6 @@
         }
       }
 
-      // Función para mostrar errores de forma más clara
       function showError(input, errorElement, message) {
         errorElement.textContent = message;
         errorElement.style.display = 'block';
@@ -849,18 +867,14 @@
         input.focus();
       }
 
-      // Función para limpiar errores
       function clearError(input, errorElement) {
         errorElement.style.display = 'none';
         input.classList.remove('error', 'warning');
       }
 
-      // Event listener para formatear teléfono en tiempo real
       phoneInput.addEventListener('input', function(e) {
         const formatted = formatPhoneNumber(e.target.value);
         e.target.value = formatted;
-        
-        // Validar y mostrar/ocultar error
         if (e.target.value && !isValidPhone(e.target.value)) {
           showError(phoneInput, phoneError, 'Por favor ingresa un número telefónico válido (10 dígitos)');
         } else {
@@ -868,16 +882,13 @@
         }
       });
 
-      // Validación en tiempo real para email
       emailInput.addEventListener('blur', async function(e) {
         const email = e.target.value.trim();
-        
         if (email && !isValidEmail(email)) {
           showError(emailInput, emailError, 'Por favor ingresa un correo electrónico válido');
           emailDuplicateError.style.display = 'none';
           return;
         }
-        
         if (email && isValidEmail(email)) {
           const emailExists = await checkEmailExists(email);
           if (emailExists) {
@@ -895,7 +906,6 @@
         }
       });
 
-      // Validación en tiempo real para nombre
       nameInput.addEventListener('blur', function(e) {
         if (e.target.value.length < 3) {
           showError(nameInput, nameError, 'Por favor ingresa tu nombre completo (mínimo 3 caracteres)');
@@ -904,7 +914,6 @@
         }
       });
 
-      // Validación en tiempo real para adultos
       adultsInput.addEventListener('blur', function(e) {
         if (e.target.value < 1) {
           showError(adultsInput, adultsError, 'Debe haber al menos 1 adulto');
@@ -913,7 +922,6 @@
         }
       });
 
-      // Validación en tiempo real para niños
       childrenInput.addEventListener('blur', function(e) {
         if (e.target.value < 0) {
           showError(childrenInput, childrenError, 'El número de niños no puede ser negativo');
@@ -943,7 +951,6 @@
           adultsInput.value = 1;
           childrenInput.value = 0;
           
-          // Limpiar errores
           [nameError, emailError, emailDuplicateError, phoneError, adultsError, childrenError].forEach(error => {
             error.style.display = 'none';
           });
@@ -960,12 +967,10 @@
       
       function handleKey(e){ 
         if (e.key === 'Escape') closeModal(); 
-        // Mejor navegación por teclado en el modal
         if (e.key === 'Tab' && modal.classList.contains('active')) {
           const focusableElements = modal.querySelectorAll('button, input, textarea, select, a[href]');
           const firstElement = focusableElements[0];
           const lastElement = focusableElements[focusableElements.length - 1];
-          
           if (e.shiftKey) {
             if (document.activeElement === firstElement) {
               lastElement.focus();
@@ -991,23 +996,19 @@
           return; 
         }
         
-        // Validar todos los campos
         let isValid = true;
         
-        // Validar nombre
         if (nameInput.value.length < 3) {
           showError(nameInput, nameError, 'Por favor ingresa tu nombre completo (mínimo 3 caracteres)');
           isValid = false;
         }
         
-        // Validar email
         const email = emailInput.value.trim();
         if (email && !isValidEmail(email)) {
           showError(emailInput, emailError, 'Por favor ingresa un correo electrónico válido');
           isValid = false;
         }
         
-        // Verificar si el correo ya existe
         if (email && isValidEmail(email)) {
           const emailExists = await checkEmailExists(email);
           if (emailExists) {
@@ -1018,26 +1019,22 @@
           }
         }
         
-        // Validar teléfono
         if (phoneInput.value && !isValidPhone(phoneInput.value)) {
           showError(phoneInput, phoneError, 'Por favor ingresa un número telefónico válido (10 dígitos)');
           isValid = false;
         }
         
-        // Validar adultos
         if (adultsInput.value < 1) {
           showError(adultsInput, adultsError, 'Debe haber al menos 1 adulto');
           isValid = false;
         }
         
-        // Validar niños
         if (childrenInput.value < 0) {
           showError(childrenInput, childrenError, 'El número de niños no puede ser negativo');
           isValid = false;
         }
         
         if (!isValid) {
-          // Enfocar el primer campo con error
           const firstError = form.querySelector('.error, .warning');
           if (firstError) firstError.focus();
           return;
@@ -1055,7 +1052,6 @@
         const screenSize = `${window.innerWidth}x${window.innerHeight}`;
 
         try {
-          // Guardar en la colección ejemploprimeracomunion_panel
           await db.collection('ejemploprimeracomunion_panel').add({
             nombre: name,
             email: email || 'No proporcionado',
@@ -1080,13 +1076,11 @@
         }
       });
 
-      // Mejor experiencia móvil
       document.addEventListener('DOMContentLoaded', ()=>{
         const inputs = document.querySelectorAll('input');
         inputs.forEach(input=>{
           input.addEventListener('touchstart', (ev)=>ev.stopPropagation(), { passive: true });
           input.addEventListener('focus', ()=> {
-            // Scroll suave para inputs en móvil
             if (window.innerWidth < 768) {
               setTimeout(() => {
                 input.scrollIntoView({ behavior: 'smooth', block: 'center' });
