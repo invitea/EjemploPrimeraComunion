@@ -177,7 +177,6 @@ form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
     if (!isFirebaseReady) {
-        // En lugar de alert, usamos console.error o un mensaje en el modal
         console.error("Error: Firebase no está inicializado o autenticado.");
         return;
     }
@@ -264,6 +263,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     
     // 3. Configurar Event Listeners del formulario
     setupInputListeners();
+    // Esta línea adjunta el evento 'click' al botón 'openRsvp' para abrir el modal
     openBtn.addEventListener('click', (e) => { e.preventDefault(); openModal(); });
     closeBtn.addEventListener('click', closeModal);
     modal.addEventListener('click', (e) => { if(e.target === modal) closeModal(); });
