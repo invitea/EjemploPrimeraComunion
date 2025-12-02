@@ -5,34 +5,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
   <title>Primera Comunión</title>
 
-  <!-- Fuentes -->
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Montserrat:wght@300;400;500;600;700&family=Parisienne&display=swap" rel="stylesheet" />
-
-  <!-- Vinculación del archivo CSS externo -->
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <!-- Decoraciones de fondo (puramente visuales) -->
   <div class="decoration circle"></div>
   <div class="decoration flower"></div>
 
   <header>
-    <div class="header-content">
+    <div class="header-container">
       <a href="https://invitea.github.io/home_page/" target="_blank" class="logo-link" aria-label="Ir a Invitéa">
-        <div class="logo-container">
+        <div class="logo-wrapper">
           <div class="logo">
             <div class="logo-text">Invitéa</div>
           </div>
         </div>
       </a>
-      <div class="social-links">
-        <a href="#" aria-label="Instagram">
-          <svg class="social-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
-        </a>
-        <a href="#" aria-label="Facebook">
-          <svg class="social-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
-        </a>
+      <div class="social-icons">
+        <a href="#" class="social-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
+        <a href="#" class="social-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
       </div>
     </div>
   </header>
@@ -49,8 +40,7 @@
     </div>
 
     <div class="content-section" role="main">
-      <!-- Fecha dinámica inyectada por app.js -->
-      <div class="event-date" id="dynamicDate" aria-label="Fecha del evento">Cargando fecha...</div>
+      <div class="event-date" id="dynamicDate" aria-label="Fecha del evento"></div>
 
       <div class="event-card" aria-labelledby="ceremonia">
         <div id="ceremonia" class="event-type">Ceremonia</div>
@@ -79,7 +69,7 @@
       <div class="footer-promo">
         <p>¿Te gustó esta invitación?</p>
         <a href="https://invitea.github.io/home_page/" target="_blank" class="btn-cotizar">
-          <span style="font-size: 14px;">✨</span> DISEÑA TU EVENTO CON INVITÉA
+          <span class="sparkle">✨</span> DISEÑA TU EVENTO CON INVITÉA
         </a>
       </div>
       
@@ -90,10 +80,9 @@
     </footer>
   </div>
 
-  <!-- Modal de Confirmación de Asistencia (RSVP) -->
   <div id="rsvpModal" class="modal" role="dialog" aria-modal="true">
     <div class="modal-content">
-      <button class="close-modal" id="closeModalBtn" aria-label="Cerrar Modal">×</button>
+      <button class="close-modal" id="closeModalBtn">×</button>
       <div class="modal-title">Confirmar Asistencia</div>
 
       <form id="rsvpForm" novalidate>
@@ -116,17 +105,17 @@
           <div class="error-message" id="phoneError">Teléfono inválido</div>
         </div>
 
-        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:15px;">
-            <div class="form-group">
-              <label for="adults" class="form-label">Adultos</label>
-              <input id="adults" name="adults" type="number" min="1" value="1" required />
-              <div class="error-message" id="adultsError">Mínimo 1</div>
-            </div>
-            <div class="form-group">
-              <label for="children" class="form-label">Niños</label>
-              <input id="children" name="children" type="number" min="0" value="0" required />
-              <div class="error-message" id="childrenError">No negativo</div>
-            </div>
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="adults" class="form-label">Adultos</label>
+            <input id="adults" name="adults" type="number" min="1" value="1" required />
+            <div class="error-message" id="adultsError">Min 1</div>
+          </div>
+          <div class="form-group">
+            <label for="children" class="form-label">Niños</label>
+            <input id="children" name="children" type="number" min="0" value="0" required />
+            <div class="error-message" id="childrenError">No negativo</div>
+          </div>
         </div>
 
         <button type="submit" class="submit-btn" id="submitBtn">Enviar Confirmación</button>
@@ -137,7 +126,8 @@
     </div>
   </div>
 
-  <!-- Vinculación del archivo JavaScript externo (Módulo) -->
-  <script type="module" src="app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js" defer></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js" defer></script>
+  <script src="app.js" defer></script>
 </body>
 </html>
